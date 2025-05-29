@@ -67,3 +67,10 @@ js-to-ts.sh
 /tools/polygerrit-updater
 /.ts-out/*
 !/.ts-out/README.md
+cache
+etc
+db
+home
+index
+logs
+einfo-scripts
