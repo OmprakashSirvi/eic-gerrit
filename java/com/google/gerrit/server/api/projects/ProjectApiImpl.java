@@ -38,6 +38,8 @@ import com.google.gerrit.extensions.api.projects.DashboardInfo;
 import com.google.gerrit.extensions.api.projects.DeleteBranchesInput;
 import com.google.gerrit.extensions.api.projects.DeleteTagsInput;
 import com.google.gerrit.extensions.api.projects.DescriptionInput;
+ //Added By Nikita jethava for PMS URL
+import com.google.gerrit.extensions.api.projects.PmsUrlInput;
 import com.google.gerrit.extensions.api.projects.HeadInput;
 import com.google.gerrit.extensions.api.projects.IndexProjectInput;
 import com.google.gerrit.extensions.api.projects.LabelApi;
@@ -77,6 +79,9 @@ import com.google.gerrit.server.restapi.project.DeleteTags;
 import com.google.gerrit.server.restapi.project.GetAccess;
 import com.google.gerrit.server.restapi.project.GetConfig;
 import com.google.gerrit.server.restapi.project.GetDescription;
+ //Added By Nikita jethava for PMS URL
+import com.google.gerrit.server.project.GetPmsUrl;
+import com.google.gerrit.server.project.PutPmsUrl;
 import com.google.gerrit.server.restapi.project.GetHead;
 import com.google.gerrit.server.restapi.project.GetParent;
 import com.google.gerrit.server.restapi.project.Index;
@@ -120,6 +125,9 @@ public class ProjectApiImpl implements ProjectApi {
   private final ProjectsCollection projects;
   private final GetDescription getDescription;
   private final PutDescription putDescription;
+   //Added By Nikita jethava for PMS URL
+  private final GetPmsUrl getPmsUrl;
+  private final PutPmsUrl putPmsUrl;
   private final ChildProjectApiImpl.Factory childApi;
   private final ChildProjectsCollection children;
   private final ProjectResource project;
@@ -168,6 +176,9 @@ public class ProjectApiImpl implements ProjectApi {
       ProjectsCollection projects,
       GetDescription getDescription,
       PutDescription putDescription,
+       //Added By Nikita jethava for PMS URL
+      GetPmsUrl getPmsUrl,
+      PutPmsUrl putPmsUrl,
       ChildProjectApiImpl.Factory childApi,
       ChildProjectsCollection children,
       ProjectJson projectJson,
@@ -212,6 +223,9 @@ public class ProjectApiImpl implements ProjectApi {
         projects,
         getDescription,
         putDescription,
+         //Added By Nikita jethava for PMS URL
+        getPmsUrl,
+        putPmsUrl,
         childApi,
         children,
         projectJson,
@@ -260,6 +274,9 @@ public class ProjectApiImpl implements ProjectApi {
       ProjectsCollection projects,
       GetDescription getDescription,
       PutDescription putDescription,
+       //Added By Nikita jethava for PMS URL
+       GetPmsUrl getPmsUrl,
+      PutPmsUrl putPmsUrl,
       ChildProjectApiImpl.Factory childApi,
       ChildProjectsCollection children,
       ProjectJson projectJson,
@@ -304,6 +321,9 @@ public class ProjectApiImpl implements ProjectApi {
         projects,
         getDescription,
         putDescription,
+         //Added By Nikita jethava for PMS URL
+        getPmsUrl,
+        putPmsUrl,
         childApi,
         children,
         projectJson,
@@ -351,6 +371,9 @@ public class ProjectApiImpl implements ProjectApi {
       ProjectsCollection projects,
       GetDescription getDescription,
       PutDescription putDescription,
+       //Added By Nikita jethava for PMS URL
+      GetPmsUrl getPmsUrl,
+      PutPmsUrl putPmsUrl,
       ChildProjectApiImpl.Factory childApi,
       ChildProjectsCollection children,
       ProjectJson projectJson,
@@ -395,6 +418,9 @@ public class ProjectApiImpl implements ProjectApi {
     this.projects = projects;
     this.getDescription = getDescription;
     this.putDescription = putDescription;
+     //Added By Nikita jethava for PMS URL
+     this.getPmsUrl = getPmsUrl;
+    this.putPmsUrl = putPmsUrl;
     this.childApi = childApi;
     this.children = children;
     this.projectJson = projectJson;
@@ -470,6 +496,12 @@ public class ProjectApiImpl implements ProjectApi {
     return projectJson.format(project.getProjectState());
   }
 
+ //Added By Nikita jethava for PMS URL
+  @Override
+  public String pmsUrl() throws RestApiException {
+    return getPmsUrl.apply(checkExists());
+  }
+
   @Override
   public String description() throws RestApiException {
     try {
@@ -521,6 +553,16 @@ public class ProjectApiImpl implements ProjectApi {
       return check.apply(checkExists(), in).value();
     } catch (Exception e) {
       throw asRestApiException("Cannot check project", e);
+    }
+  }
+   //Added By Nikita jethava for PMS URL
+
+   @Override
+  public void pmsUrl(PmsUrlInput in) throws RestApiException {
+    try {
+      putPmsUrl.apply(checkExists(), in);
+    } catch (Exception e) {
+      throw asRestApiException("Cannot put project PMS URL", e);
     }
   }
 

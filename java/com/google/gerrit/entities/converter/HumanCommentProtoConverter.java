@@ -135,6 +135,7 @@ public enum HumanCommentProtoConverter
                 ? (short) optInFilePosition.get().getSide().getNumber()
                 : Side.REVISION_VALUE,
             proto.getCommentText(),
+            proto.getDefectClassification(),
             proto.getServerId(),
             proto.getUnresolved(),
             proto.hasDestCommitId()

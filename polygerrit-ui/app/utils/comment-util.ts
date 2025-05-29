@@ -650,6 +650,8 @@ export function convertToCommentInput(comment: Comment): CommentInput {
   const output: CommentInput = {
     message: comment.message,
     unresolved: comment.unresolved,
+    //Added By Nikita jethava
+    defect_classification: comment.defect_classification,
   };
 
   if (comment.id) {

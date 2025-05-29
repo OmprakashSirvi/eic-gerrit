@@ -227,6 +227,11 @@ export class GrComment extends LitElement {
   @state()
   messageText = '';
 
+    // Added by Nikita jethava for DefectClassification
+  /* The 'dirty' state of the comment.defect_classification, which will be saved on demand. */
+  @state()
+  defect_classification = '';
+
   /**
    * An hint for autocompleting the comment message from plugin suggestion
    * providers.
@@ -712,6 +717,7 @@ export class GrComment extends LitElement {
           ${this.renderHeader()}
           <div class="body">
             ${this.renderEditingTextarea()} ${this.renderCommentMessage()}
+              ${this.renderDefectClass()}
             <gr-endpoint-slot name="above-actions"></gr-endpoint-slot>
             ${this.renderHumanActions()}
           </div>
@@ -722,6 +728,121 @@ export class GrComment extends LitElement {
       ${this.renderConfirmDialog()}
     `;
   }
+
+  private SUBMIT_TYPES = {
+    //added by Nikita jethava for defect Classification.
+      QuestionQuery: {
+        value: 'Question/ Query',
+        label: 'Question/ Query',
+      },
+      CodeFormatting: {
+        value: 'Code Formatting',
+        label: 'Code Formatting',
+      },
+      CodeCommenting: {
+        value: 'Code Commenting',
+        label: 'Code Commenting',
+      },
+      PotentialIssues: {
+        value: 'Potential Issues',
+        label: 'Potential Issues',
+      },
+      Functional: {
+        value: 'Functional',
+        label: 'Functional',
+      },
+      MissingRequirement: {
+        value: 'Missing Requirement',
+        label: 'Missing Requirement',
+      },
+      ErrorHandling: {
+        value: 'Error Handling',
+        label: 'Error Handling',
+      },
+      Design: {
+        value: 'Design',
+        label: 'Design',
+      },
+      CodeLogic: {
+        value: 'Code Logic',
+        label: 'Code Logic',
+      },
+       CodeOptimization: {
+        value: 'Code Optimization',
+        label: 'Code Optimization',
+      },
+       UnitTesting: {
+        value: 'Unit Testing',
+        label: 'Unit Testing',
+      },
+      Performance: {
+        value: 'Performance',
+        label: 'Performance',
+      },
+      Validations: {
+        value: 'Validations',
+        label: 'Validations',
+      },
+      StandardsCompliance: {
+        value: 'Standard/ Compliance',
+        label: 'Standard/ Compliance',
+      },
+      GUI: {
+        value: 'GUI',
+        label: 'GUI',
+      },
+      Database: {
+        value: 'Database',
+        label: 'Database',
+      },
+        BuildConfiguration: {
+        value: 'Build / Configuration',
+        label: 'Build / Configuration',
+      },
+      SystemError: {
+        value: 'System Error',
+        label: 'System Error',
+      },
+      EnvironmentRelated: {
+        value: 'Environment Related',
+        label: 'Environment Related',
+      },
+      InterfaceIntegration : {
+        value: 'Interface/ Integration',
+        label: 'Interface/ Integration',
+        },
+    };
+
+  private selectedChanged(e: ValueChangedEvent<string>) {
+    console.log(`Select changed: ${e?.detail?.value}`);
+    this.defect_classification = e.detail?.value;
+  }
+
+  // Added by Nikita jethava
+  private renderDefectClass() {
+    // if(!this.SUBMIT_TYPES(this.comment))return;
+    return html`
+      <div>
+        <div class="title">Defect Classification :</div>
+        <div class="value">
+          <gr-select
+              id="diffectClass"
+              .bindValue="${this.comment?.defect_classification}"
+              @bind-value-changed=${this.selectedChanged}>
+              <select>
+                <option value="" disabled selected>
+                  Select a defect classification
+                </option>
+                ${Object.entries(this.SUBMIT_TYPES).map(([_, item]) => html`
+                  <option value="${item.value}">${item.label}</option>
+                `)}
+              </select>
+            </gr-select>
+        </div>
+      </div>
+    `;
+  }
+  //end code by Nikita jethava
 
   private renderHeader() {
     if (this.hideHeader) return nothing;
@@ -1609,6 +1730,8 @@ export class GrComment extends LitElement {
     return (
       isError(this.comment) ||
       this.messageText.trimEnd() !== this.comment.message ||
+         // Added by Nikita jethava for DefectClassification
+      this.defect_classification.trimEnd() !== this.comment.defect_classification ||
       this.unresolved !== this.comment.unresolved ||
       this.isFixSuggestionChanged()
     );
@@ -1618,9 +1741,12 @@ export class GrComment extends LitElement {
   private rawSave(options: {showToast: boolean}) {
     assert(isDraft(this.comment), 'only drafts are editable');
     assert(!isSaving(this.comment), 'saving already in progress');
+    console.log("Inside rawSave");
     const draft: DraftInfo = {
       ...this.comment,
       message: this.messageText.trimEnd(),
+       // Added by Nikita jethava for DefectClassification
+      defect_classification: this.defect_classification,
       unresolved: this.unresolved,
     };
     if (this.isFixSuggestionChanged()) {

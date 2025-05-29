@@ -31,10 +31,16 @@ public final class RobotComment extends Comment {
       Instant writtenOn,
       short side,
       String message,
+      //Added By Nikita jethava
+      String defectClassification,
       String serverId,
       String robotId,
       String robotRunId) {
-    super(key, author, writtenOn, side, message, serverId);
+   // super(key, author, writtenOn, side, message, serverId);
+   //Added comment above line and updated by Nikita jethava
+  super(key, author, writtenOn, side, message, defectClassification, serverId);
+
+
     this.robotId = robotId;
     this.robotRunId = robotRunId;
   }

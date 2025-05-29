@@ -227,6 +227,8 @@ public abstract class Comment {
 
   public short side;
   public String message;
+  //Added By Nikita jethava 
+  public String defectClassification;
   public String parentUuid;
   public Range range;
   public String tag;
@@ -250,6 +252,8 @@ public abstract class Comment {
         c.writtenOn.toInstant(),
         c.side,
         c.message,
+        //Added by ikita jethava
+        c.defectClassification,
         c.serverId,
         c.revId,
         c.parentUuid,
@@ -261,13 +265,15 @@ public abstract class Comment {
   }
 
   public Comment(
-      Key key, Account.Id author, Instant writtenOn, short side, String message, String serverId) {
+      Key key, Account.Id author, Instant writtenOn, short side, String message,String defectClassification, String serverId) {
     this(
         key,
         author,
         writtenOn,
         side,
         message,
+        //Added by Nikita jethava   
+       defectClassification,
         serverId,
         /* revId= */ null,
         /* parentUuid= */ null,
@@ -282,6 +288,8 @@ public abstract class Comment {
       Instant writtenOn,
       short side,
       String message,
+      //Added by Nikita jethava   
+      String defectClassification,
       String serverId,
       @Nullable String revId,
       @Nullable String parentUuid,
@@ -294,6 +302,8 @@ public abstract class Comment {
     this.writtenOn = Timestamp.from(writtenOn);
     this.side = side;
     this.message = message;
+    //Added by Nikita jethava  
+    this.defectClassification = defectClassification; 
     this.serverId = serverId;
     this.revId = revId;
     this.parentUuid = parentUuid;
@@ -414,6 +424,8 @@ public abstract class Comment {
         .add("writtenOn", writtenOn)
         .add("side", side)
         .add("message", Objects.toString(message, ""))
+        //Added By Nikita jethava
+        .add("defectClassification",Objects.toString(defectClassification, ""))
         .add("parentUuid", Objects.toString(parentUuid, ""))
         .add("range", Objects.toString(range, ""))
         .add("revId", Objects.toString(revId, ""))

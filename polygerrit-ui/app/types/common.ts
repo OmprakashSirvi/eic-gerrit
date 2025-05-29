@@ -973,6 +973,8 @@ export interface CommentInput {
   tag?: string;
   unresolved?: boolean;
   fix_suggestions?: FixSuggestionInfo[];
+  //Added By Nikita jethava
+  defect_classification?: string;
 }
 
 /**

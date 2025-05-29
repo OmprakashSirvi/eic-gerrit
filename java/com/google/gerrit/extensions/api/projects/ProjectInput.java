@@ -23,6 +23,8 @@ public class ProjectInput {
   public String name;
   public String parent;
   public String description;
+   //Added By Nikita jethava for PMS URL
+  public String projectPMSUrl;
   public boolean permissionsOnly;
   public boolean createEmptyCommit;
   public SubmitType submitType;

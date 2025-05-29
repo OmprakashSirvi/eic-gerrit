@@ -40,6 +40,8 @@ public class HumanComment extends Comment {
       Instant writtenOn,
       short side,
       String message,
+      //Added by Nikita jethava
+      String defectClassification,
       String serverId,
       boolean unresolved) {
     this(
@@ -48,6 +50,8 @@ public class HumanComment extends Comment {
         writtenOn,
         side,
         message,
+        //Added by Nikita jethava
+        defectClassification,
         serverId,
         unresolved,
         /* revId= */ null,
@@ -63,6 +67,8 @@ public class HumanComment extends Comment {
       Instant writtenOn,
       short side,
       String message,
+      //Added By Nikita jethava
+      String defectClassification,
       String serverId,
       boolean unresolved,
       @Nullable String revId,
@@ -76,6 +82,8 @@ public class HumanComment extends Comment {
         writtenOn,
         side,
         message,
+        //Added By Nikita jethava
+        defectClassification,
         serverId,
         revId,
         parentUuid,

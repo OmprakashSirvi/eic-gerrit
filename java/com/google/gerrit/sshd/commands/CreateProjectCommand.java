@@ -76,6 +76,15 @@ final class CreateProjectCommand extends SshCommand {
       usage = "description of project")
   private String projectDescription = "";
 
+ //Added By Nikita jethava for PMS URL
+  @Option(
+    name = "--pms-url",
+    aliases = {"-u"},
+    metaVar = "PMS URL",
+    usage = "PMS URL of project"
+  )
+  private String projectPMSUrl = "";
+
   @Option(
       name = "--submit-type",
       aliases = {"-t"},
@@ -183,6 +192,8 @@ final class CreateProjectCommand extends SshCommand {
         }
         input.permissionsOnly = permissionsOnly;
         input.description = projectDescription;
+         //Added By Nikita jethava for PMS URL
+        input.projectPMSUrl = projectPMSUrl;
         input.submitType = submitType;
         input.useContributorAgreements = contributorAgreements;
         input.useSignedOffBy = signedOffBy;

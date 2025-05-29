@@ -189,6 +189,8 @@ public class ReplyAttentionSetUpdates {
                     : PatchSet.id(changeNotes.getChange().getId(), commentInput.patchSet),
                 commentInput.side(),
                 commentInput.message,
+                //Added by Nikita jethava
+                commentInput.defectClassification,
                 commentInput.unresolved,
                 commentInput.inReplyTo,
                 CommentsUtil.createFixSuggestionsFromInput(commentInput.fixSuggestions)));

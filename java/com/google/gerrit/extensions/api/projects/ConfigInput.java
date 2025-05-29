@@ -21,6 +21,8 @@ import java.util.Map;
 
 public class ConfigInput {
   public String description;
+  //Added By Nikita jethava for PMS URL
+   public String pmsUrl;
   public InheritableBoolean useContributorAgreements;
   public InheritableBoolean useContentMerge;
   public InheritableBoolean useSignedOffBy;

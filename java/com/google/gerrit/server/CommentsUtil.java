@@ -90,6 +90,8 @@ public class CommentsUtil {
               .compare(a.line, b.line, NULLS_FIRST)
               .compare(a.inReplyTo, b.inReplyTo, NULLS_FIRST)
               .compare(a.message, b.message)
+              //Added By Nikita jethava
+               .compare(a.defectClassification, b.defectClassification)
               .compare(a.id, b.id)
               .result();
         }
@@ -135,6 +137,8 @@ public class CommentsUtil {
       PatchSet.Id psId,
       short side,
       String message,
+      //Added By Nikita jethava
+      String defectClassification,
       @Nullable Boolean unresolved,
       @Nullable String parentUuid,
       @Nullable List<FixSuggestion> fixSuggestions) {
@@ -159,6 +163,8 @@ public class CommentsUtil {
             when,
             side,
             message,
+            //Added by Nikita jethava
+            defectClassification,
             serverId,
             unresolved,
             /* revId= */ null,
@@ -175,6 +181,8 @@ public class CommentsUtil {
       PatchSet.Id psId,
       short side,
       String message,
+      //Added By Nikita jethava
+      String defectClassification,
       String robotId,
       String robotRunId) {
     RobotComment c =
@@ -184,6 +192,8 @@ public class CommentsUtil {
             ctx.getWhen(),
             side,
             message,
+            //Added By Nikita jethava
+             defectClassification,
             serverId,
             robotId,
             robotRunId);

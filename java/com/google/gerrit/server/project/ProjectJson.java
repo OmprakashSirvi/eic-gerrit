@@ -76,6 +76,8 @@ public class ProjectJson {
     Project.NameKey parentName = p.getParent(allProjects);
     info.parent = parentName != null ? parentName.get() : null;
     info.description = Strings.emptyToNull(p.getDescription());
+     //Added By Nikita jethava for PMS URL
+    //info.pmsUrl = Strings.emptyToNull(p.getPmsUrl());
     info.state = p.getState();
     info.id = Url.encode(info.name);
     ImmutableList<WebLinkInfo> links = webLinks.getProjectLinks(p.getName());

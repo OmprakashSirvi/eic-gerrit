@@ -43,6 +43,22 @@ public interface ProjectApi {
 
   void description(DescriptionInput in) throws RestApiException;
 
+ //Added By Nikita jethava for PMS URL
+  String pmsUrl() throws RestApiException;
+  void pmsUrl(PmsUrlInput in) throws RestApiException;
+
+ /* @Override
+    public String pmsUrl() throws RestApiException {
+      throw new NotImplementedException();
+    }
+
+      @Override
+    public void pmsUrl(PmsUrlInput in) throws RestApiException {
+      throw new NotImplementedException();
+    }*/
+
+    //end code by Nikita jethava
+
   ProjectAccessInfo access() throws RestApiException;
 
   @CanIgnoreReturnValue

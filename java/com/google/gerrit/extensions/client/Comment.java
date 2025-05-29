@@ -46,6 +46,10 @@ public abstract class Comment {
 
   public String message;
 
+//Added By Nikita jethava 
+  public String defectClassification;
+
+
   /**
    * Hex commit SHA1 (as 40 characters hex string) of the commit of the patchset to which this
    * comment applies.
@@ -156,6 +160,8 @@ public abstract class Comment {
           && Objects.equals(inReplyTo, c.inReplyTo)
           && Objects.equals(updated, c.updated)
           && Objects.equals(message, c.message)
+          //Added By nIkita jethava
+          && Objects.equals(defectClassification, c.defectClassification)
           && Objects.equals(commitId, c.commitId)
           && Objects.equals(fixSuggestions, c.fixSuggestions);
     }
@@ -164,7 +170,11 @@ public abstract class Comment {
 
   @Override
   public int hashCode() {
-    return Objects.hash(
-        patchSet, id, path, side, parent, line, range, inReplyTo, updated, message, fixSuggestions);
+   // return Objects.hash(
+
+      //  patchSet, id, path, side, parent, line, range, inReplyTo, updated, message, fixSuggestions);
+      //commenting above line added updated line by nikita jethava
+                return Objects.hash(patchSet, id, path, side, parent, line, range, inReplyTo, updated, message, defectClassification);
+
   }
 }

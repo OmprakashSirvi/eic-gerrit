@@ -105,6 +105,9 @@ public abstract class Project {
 
   @Nullable
   public abstract String getDescription();
+  //Added By Nikita jethava for pms url
+  @Nullable
+  public abstract String getPmsUrl();
 
   public abstract ImmutableMap<BooleanProjectConfig, InheritableBoolean> getBooleanConfigs();
 
@@ -197,6 +200,9 @@ public abstract class Project {
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setDescription(String description);
+    //Added by Nikita jethava for PMS URL
+        public abstract Builder setPmsUrl(String pmsUrl);
+
 
     @CanIgnoreReturnValue
     public Builder setBooleanConfig(BooleanProjectConfig config, InheritableBoolean val) {

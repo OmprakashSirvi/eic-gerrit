@@ -502,6 +502,8 @@ message HumanComment {
   optional fixed64 written_on_millis = 11;
   // Required.
   optional string server_id = 12;
+  // Required
+  optional string defect_classification = 14;
 
   // Next Id: 4
   message FixReplacement {

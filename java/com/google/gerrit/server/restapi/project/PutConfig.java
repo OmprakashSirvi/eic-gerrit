@@ -172,6 +172,8 @@ public class PutConfig implements RestModifyView<ProjectResource, ConfigInput> {
     projectConfig.updateProject(
         p -> {
           p.setDescription(Strings.emptyToNull(input.description));
+           //Added By Nikita jethava for PMS URL
+            p.setPmsUrl(Strings.emptyToNull(input.pmsUrl));
           for (BooleanProjectConfig cfg : BooleanProjectConfig.values()) {
             InheritableBoolean val = BooleanProjectConfigTransformations.get(cfg, input);
             if (val != null) {

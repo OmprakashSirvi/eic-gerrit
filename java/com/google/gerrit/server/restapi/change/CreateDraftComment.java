@@ -92,6 +92,12 @@ public class CreateDraftComment implements RestModifyView<RevisionResource, Draf
       throw new BadRequestException("path must be non-empty");
     } else if (in.message == null || in.message.trim().isEmpty()) {
       throw new BadRequestException("message must be non-empty");
+      //Added by Nikita jethava
+        } else if (in.defectClassification == null || in.defectClassification.trim().isEmpty()) {
+          //} else if (in.defectClassification == null || in.defectClassification.isEmpty()) {
+
+      throw new BadRequestException("defectClass must be non-empty");
+      //end code by Nikita 
     } else if (in.path.equals(PATCHSET_LEVEL)
         && (in.side != null || in.range != null || in.line != null)) {
       throw new BadRequestException("patchset-level comments can't have side, range, or line");
@@ -184,6 +190,8 @@ public class CreateDraftComment implements RestModifyView<RevisionResource, Draf
             ps.id(),
             draftInput.side(),
             draftInput.message.trim(),
+            //Added By Nikita jethava
+            draftInput.defectClassification,
             draftInput.unresolved,
             parentUuid,
             CommentsUtil.createFixSuggestionsFromInput(draftInput.fixSuggestions));

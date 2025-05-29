@@ -497,6 +497,8 @@ export declare interface ConfigArrayParameterInfo
  */
 export declare interface ConfigInfo {
   description?: string;
+  //Added By Nikita jethava
+  pmsUrl?: String;
   use_contributor_agreements?: InheritedBooleanInfo;
   use_content_merge?: InheritedBooleanInfo;
   use_signed_off_by?: InheritedBooleanInfo;
@@ -535,6 +537,8 @@ export declare interface CommentInfo {
   range?: CommentRange;
   in_reply_to?: UrlEncodedCommentId;
   message?: string;
+  //Added By Nikita jethava
+  defect_classification?: string;
   author?: AccountInfo;
   tag?: string;
   unresolved?: boolean;

@@ -205,7 +205,8 @@ export class GrRepo extends LitElement {
             </h2>
             <div id="form">
               <fieldset>
-                ${this.renderDescription()} ${this.renderRepoOptions()}
+                ${this.renderDescription()} 
+                ${this.renderpmsUrl()} ${this.renderRepoOptions()}
                 ${this.renderPluginConfig()}
                 <gr-button
                   id="saveBtn"
@@ -281,6 +282,29 @@ export class GrRepo extends LitElement {
       </fieldset>
     `;
   }
+
+  //Added By Nikita jethava for PMS URL configuration
+private renderpmsUrl() {
+  //const pmsUrl = "XYZ";
+  //Do not remove this below comment and later on replace it with proper line
+//.text=${this.repoConfig.pmsUrl ?? ''  
+  assertIsDefined(this.repoConfig, 'repoConfig');
+  return html`
+    <h3 id="pmsUrl" class="heading-3">PMS URL</h3>
+    <fieldset>
+      <gr-suggestion-textarea
+        id="PmsUrlInput"
+        class="pmsUrl"
+        autocomplete="on"
+        monospace
+          .text=${this.repoConfig.pmsUrl ?? ''
+        }
+        @text-changed=${this.handlepmsUrlTextChanged}
+      ></gr-suggestion-textarea>
+    </fieldset>
+  `;
+}
+//End of code by Nikita jethava 
 
   private renderRepoOptions() {
     return html`
@@ -1188,6 +1212,19 @@ export class GrRepo extends LitElement {
     };
     this.requestUpdate();
   }
+
+  //Added By Nikita jethava for PMS URL configuration
+	private handlepmsUrlTextChanged(e: BindValueChangeEvent) {
+    if (!this.repoConfig || this.loading) return;
+    if (this.repoConfig.pmsUrl === e.detail.value) return;
+    this.repoConfig = {
+      ...this.repoConfig,
+      pmsUrl: e.detail.value,
+    };
+    this.requestUpdate();
+  }
+  //End of code by Nikita jethava
+
 
   private handleStateSelectBindValueChanged(e: BindValueChangeEvent) {
     if (!this.repoConfig || this.loading) return;

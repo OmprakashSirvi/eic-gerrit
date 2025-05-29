@@ -108,6 +108,7 @@ public class ProjectConfig extends VersionedMetaData implements ValidationError.
   public static final String COMMENTLINK = "commentlink";
   public static final String LABEL = "label";
   public static final String KEY_LABEL_DESCRIPTION = "description";
+
   public static final String KEY_FUNCTION = "function";
   public static final String KEY_DEFAULT_VALUE = "defaultValue";
   public static final String KEY_ALLOW_POST_SUBMIT = "allowPostSubmit";
@@ -142,6 +143,8 @@ public class ProjectConfig extends VersionedMetaData implements ValidationError.
 
   private static final String PROJECT = "project";
   private static final String KEY_DESCRIPTION = "description";
+ //Added By Nikita jethava for PMS URL
+  private static final String KEY_PMS_URL = "pmsUrl";
 
   public static final String ACCESS = "access";
   private static final String KEY_INHERIT_FROM = "inheritFrom";
@@ -663,6 +666,13 @@ public class ProjectConfig extends VersionedMetaData implements ValidationError.
     Config rc = readConfig(PROJECT_CONFIG, baseConfig);
     Project.Builder p = Project.builder(projectName);
     p.setDescription(Strings.nullToEmpty(rc.getString(PROJECT, null, KEY_DESCRIPTION)));
+     //Added By Nikita jethava for PMS URL
+    p.setPmsUrl(Strings.nullToEmpty(rc.getString(PROJECT, null, KEY_PMS_URL)));
+
+   /* if (p.getPmsUrl() == null) {
+      p.setPmsUrl("");
+    }*/
+
     if (revision != null) {
       p.setConfigRefState(revision.toObjectId().name());
     }
@@ -738,6 +748,8 @@ public class ProjectConfig extends VersionedMetaData implements ValidationError.
     for (String name : rc.getSubsections(CONTRIBUTOR_AGREEMENT)) {
       ContributorAgreement.Builder ca = ContributorAgreement.builder(name);
       ca.setDescription(rc.getString(CONTRIBUTOR_AGREEMENT, name, KEY_DESCRIPTION));
+      //Added By Nikita jethava
+      //ca.setPmsUrl(rc.getString(CONTRIBUTOR_AGREEMENT, name, KEY_PMS_URL));
       ca.setAgreementUrl(rc.getString(CONTRIBUTOR_AGREEMENT, name, KEY_AGREEMENT_URL));
       ca.setAccepted(loadPermissionRules(rc, CONTRIBUTOR_AGREEMENT, name, KEY_ACCEPTED, false));
       ca.setExcludeProjectsRegexes(
@@ -1324,6 +1336,13 @@ public class ProjectConfig extends VersionedMetaData implements ValidationError.
     } else {
       rc.unset(PROJECT, null, KEY_DESCRIPTION);
     }
+ //Added By Nikita jethava for PMS URL
+     if (p.getPmsUrl() != null && !p.getPmsUrl().isEmpty()) {
+      rc.setString(PROJECT, null, KEY_PMS_URL, p.getPmsUrl());
+    } else {
+      rc.unset(PROJECT, null, KEY_PMS_URL);
+    }
+    //end of code by Nikita
     set(rc, ACCESS, null, KEY_INHERIT_FROM, p.getParentName());
 
     for (BooleanProjectConfig config : BooleanProjectConfig.values()) {

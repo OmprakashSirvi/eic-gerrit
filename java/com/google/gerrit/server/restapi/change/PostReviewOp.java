@@ -461,6 +461,8 @@ public class PostReviewOp implements BatchUpdateOp {
                   psId,
                   inputComment.side(),
                   inputComment.message,
+                  //Added By Nikita jethava
+                  inputComment.defectClassification,
                   inputComment.unresolved,
                   parent,
                   CommentsUtil.createFixSuggestionsFromInput(inputComment.fixSuggestions));
@@ -588,6 +590,8 @@ public class PostReviewOp implements BatchUpdateOp {
             psId,
             robotCommentInput.side(),
             robotCommentInput.message,
+            //Added By nIkita jethava
+            robotCommentInput.defectClassification,
             robotCommentInput.robotId,
             robotCommentInput.robotRunId);
     robotComment.parentUuid = Url.decode(robotCommentInput.inReplyTo);

@@ -735,6 +735,7 @@ export class CommentsModel extends Model<CommentState> {
     assertIsDefined(draft.patch_set, 'patchset number of comment draft');
     assert(!!draft.message?.trim(), 'cannot save empty draft');
     assert(!isSaving(draft), 'saving already in progress');
+    console.log("Saving draft");
 
     // optimistic update
     const draftSaving: DraftInfo = {...draft, savingState: SavingState.SAVING};
@@ -750,6 +751,7 @@ export class CommentsModel extends Model<CommentState> {
 
     let savedComment;
     try {
+      console.log(`Saving draft defect_classification: ${draft?.defect_classification}`);
       const result = await this.restApiService.saveDiffDraft(
         changeNum,
         draft.patch_set,

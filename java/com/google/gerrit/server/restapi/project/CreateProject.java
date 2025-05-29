@@ -133,6 +133,8 @@ public class CreateProject
     args.createEmptyCommit = input.createEmptyCommit;
     args.permissionsOnly = input.permissionsOnly;
     args.projectDescription = Strings.emptyToNull(input.description);
+     //Added By Nikita jethava for PMS URL
+    args.projectPMSUrl = Strings.emptyToNull(input.projectPMSUrl);
     args.submitType = input.submitType;
     args.branch = normalizeBranchNames(input.branches);
     if (input.owners == null || input.owners.isEmpty()) {

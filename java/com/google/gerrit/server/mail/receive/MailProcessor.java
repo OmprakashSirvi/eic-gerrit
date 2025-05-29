@@ -451,6 +451,8 @@ public class MailProcessor {
               patchSetForComment.id(),
               (short) side.ordinal(),
               mailComment.getMessage(),
+              //Added By Nikita jethava
+              null,
               false,
               null,
               null);

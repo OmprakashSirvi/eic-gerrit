@@ -220,6 +220,8 @@ public class CommentJson {
       }
       r.inReplyTo = Url.encode(c.parentUuid);
       r.message = Strings.emptyToNull(c.message);
+      //Added By Nikita jethava
+      r.defectClassification = Strings.emptyToNull(c.defectClassification);
       r.updated = c.writtenOn;
       r.range = toRange(c.range);
       r.tag = c.tag;

@@ -26,7 +26,8 @@ import java.util.Map;
 
 public class ConfigInfo {
   public String description;
-
+ //Added By Nikita jethava for PMS URL
+   public String pmsUrl;
   public InheritedBooleanInfo useContributorAgreements;
   public InheritedBooleanInfo useContentMerge;
   public InheritedBooleanInfo useSignedOffBy;

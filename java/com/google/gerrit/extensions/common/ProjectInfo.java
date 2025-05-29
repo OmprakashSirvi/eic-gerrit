@@ -23,6 +23,8 @@ public class ProjectInfo {
   public String name;
   public String parent;
   public String description;
+   //Added By Nikita jethava for PMS URL
+  public String pmsUrl;
   public ProjectState state;
   public Map<String, String> branches;
   public List<WebLinkInfo> webLinks;

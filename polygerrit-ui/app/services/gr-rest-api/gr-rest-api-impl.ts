@@ -2914,7 +2914,7 @@ export class GrRestApiServiceImpl implements RestApiService, Finalizable {
     if (!this._pendingRequests[Requests.SEND_DIFF_DRAFT]) {
       this._pendingRequests[Requests.SEND_DIFF_DRAFT] = [];
     }
-
+    console.log(`Sending PUT request to: ${endpoint}, body: ${draft}`);
     const fetchOptions =
       method === HttpMethod.PUT
         ? getFetchOptions({method, body: draft})

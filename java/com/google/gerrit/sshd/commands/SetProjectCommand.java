@@ -41,6 +41,15 @@ final class SetProjectCommand extends SshCommand {
       usage = "description of project")
   private String projectDescription;
 
+ //Added By Nikita jethava for PMS URL
+   @Option(
+    name = "--pms-url",
+    aliases = {"-u"},
+    metaVar = "PMS URL",
+    usage = "PMS URL of project"
+  )
+  private String projectPMSUrl;
+
   @Option(
       name = "--submit-type",
       aliases = {"-t"},
@@ -147,6 +156,12 @@ final class SetProjectCommand extends SshCommand {
       configInput.description = projectDescription;
     } else {
       configInput.description = projectState.getProject().getDescription();
+    }
+    //Added By Nikita jethava for PMS URL
+     if (Strings.emptyToNull(projectPMSUrl) != null) {
+      configInput.pmsUrl = projectPMSUrl;
+    } else {
+      configInput.pmsUrl = projectControl.getProject().getPmsUrl();
     }
 
     try {

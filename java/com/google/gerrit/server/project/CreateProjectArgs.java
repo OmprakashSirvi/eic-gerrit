@@ -27,6 +27,8 @@ public class CreateProjectArgs {
   public List<AccountGroup.UUID> ownerIds;
   public Project.NameKey newParent;
   public String projectDescription;
+   //Added By Nikita jethava for PMS URL
+  public String projectPMSUrl;
   public SubmitType submitType;
   public InheritableBoolean contributorAgreements;
   public InheritableBoolean signedOffBy;
