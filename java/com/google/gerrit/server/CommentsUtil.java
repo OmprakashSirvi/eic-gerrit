@@ -20,6 +20,27 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 
+//Added By Nikita jethava for PMS ticket creation 
+import java.io.StringWriter;
+import java.io.PrintWriter;
+import java.util.Base64;
+import java.nio.charset.StandardCharsets;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.nio.charset.MalformedInputException;
+import java.net.MalformedURLException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.Formatter;
+import java.util.logging.SimpleFormatter;
+//end code by Nikita 
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -119,6 +140,39 @@ public class CommentsUtil {
   private final GitRepositoryManager repoManager;
   private final String serverId;
 
+  //Added By Nikita jethava for PMS ticket creation 
+
+  // private static final int SUBJECT_MAX_LENGTH = 50;
+  // private static final String POST_URL = "http://10.115.3.165/issues.json";
+  // private static final String GET_URL_PRIFIX = "http://10.115.3.165/users.json?name=";
+  // private static final String USERNAME_PASSWORD = "gerrit:QJ1NiNIhbcnh";
+  // private static final String ENCODED_AUTH = Base64.getEncoder().encodeToString((USERNAME_PASSWORD).getBytes(StandardCharsets.UTF_8));  // Support in Java 8
+  // private static final String DEFAULT_API_KEY = "fd6f3032d4cb911a7a883f295c99cff1be410fa0"; // This might be invalid.
+  // private static final String ISSUE_STR = "\"issue\": ";
+  // private static final String PROJECT_ID_STR = "\"project_id\": ";
+  // private static final String TRACKER_ID_STR = "\"tracker_id\": 1,";
+  // private static final String STATUS_ID_STR = "\"status_id\": 1,";
+  // private static final String PRIORITY_ID_STR = "\"priority_id\": 2,";
+  // private static final String AUTHOR_ID_STR = "\"author_id\": ";
+  // private static final String SUBJECT_STR = "\"subject\": ";
+  // private static final String DESCRIPTION_STR = "\"description\": ";
+  // private static final String START_DATE_STR = "\"start_date\": ";
+  // private static final String DONE_RATIO_STR = "\"done_ratio\": 0,";
+  // private static final String PROJECT_SCOPE_STR = "\"project_scope\": 6,";
+  // private static final String TARGET_VERSION_STR = "\"target_version_id\": 0,";
+  // private static final String ESTIMATED_HOURS_STR = "\"value_hours\": \"0\",";
+  // private static final String REVIEW_DEFECT_COUNT_STR = "\"number_of_review_defects\": 1,";
+  // private static final String CUSTOM_FIELDS_STR = "\"custom_fields\": ";
+  // private static final String CUSTOM_FIELDS_DEFECT_CLASSIFICATION_STR = "\"id\":15,\"value\": ";
+  // private static final String CUSTOM_FIELDS_REVIEW_DEFECT_STR = "{ \"id\":14,\"value\":\"Review Defect\" }";
+  // private static final String CUSTOM_FIELDS_LIVE_ISSUE_STR = "{\"id\" :121,\"value\" : 0}";
+  // private static final String INVALID_CHAR_SET = "\"#$%";
+  private static FileHandler handler = new FileHandler("logs/PMS.log");
+  private static Logger logger = Logger.getLogger("GERRIT_PMS_log");
+  // private static String pmsApiKey;
+
+  //end code by Nikita jethava 
+
   @Inject
   CommentsUtil(
       DiffOperations diffOperations,
@@ -127,8 +181,17 @@ public class CommentsUtil {
     this.diffOperations = diffOperations;
     this.repoManager = repoManager;
     this.serverId = serverId;
+
+  try {
+      SimpleFormatter formatter = new SimpleFormatter();
+      handler.setFormatter(formatter);
+      logger.addHandler(handler);
+    } catch (Exception e)
+    {
+    }
   }
 
+  // We will need to add PMS ticket creation logic while posting review here..
   public HumanComment newHumanComment(
       ChangeNotes changeNotes,
       CurrentUser currentUser,

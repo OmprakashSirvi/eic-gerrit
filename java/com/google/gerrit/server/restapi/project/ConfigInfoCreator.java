@@ -46,10 +46,12 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import com.google.common.flogger.FluentLogger;
 
 public class ConfigInfoCreator {
   /** do not instantiate this class. */
   private ConfigInfoCreator() {}
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   @SuppressWarnings("deprecation")
   public static ConfigInfo constructInfo(
@@ -64,6 +66,8 @@ public class ConfigInfoCreator {
     ConfigInfo configInfo = new ConfigInfo();
     Project p = projectState.getProject();
     configInfo.description = Strings.emptyToNull(p.getDescription());
+    configInfo.pmsUrl = Strings.emptyToNull(p.getPmsUrl());
+    logger.atInfo().log("configInfo.pmsURL: %s", configInfo.pmsUrl);
 
     ProjectState parentState = Iterables.getFirst(projectState.parents(), null);
     for (BooleanProjectConfig cfg : BooleanProjectConfig.values()) {
@@ -140,6 +144,7 @@ public class ConfigInfoCreator {
       ConfigParameterInfo p = new ConfigParameterInfo();
       p.displayName = configEntry.getDisplayName();
       p.description = configEntry.getDescription();
+      p.pmsUrl = configEntry.getPmsUrl();
       p.warning = configEntry.getWarning(project);
       p.type = configEntry.getType();
       p.permittedValues = configEntry.getPermittedValues();

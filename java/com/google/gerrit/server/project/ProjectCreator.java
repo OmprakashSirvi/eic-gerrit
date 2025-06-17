@@ -156,9 +156,12 @@ public class ProjectCreator {
     try (MetaDataUpdate md = metaDataUpdateFactory.create(args.getProject())) {
       ProjectConfig config = projectConfigFactory.read(md);
 
+      // Set Here
       config.updateProject(
           newProject -> {
             newProject.setDescription(Strings.nullToEmpty(args.projectDescription));
+            //Added By Nikita jethava for PMS URL
+            newProject.setPmsUrl(Strings.nullToEmpty(args.projectPMSUrl));
             newProject.setSubmitType(
                 MoreObjects.firstNonNull(
                     args.submitType, repositoryCfg.getDefaultSubmitType(args.getProject())));

@@ -192,7 +192,7 @@ final class CreateProjectCommand extends SshCommand {
         }
         input.permissionsOnly = permissionsOnly;
         input.description = projectDescription;
-         //Added By Nikita jethava for PMS URL
+         // Added By Nikita jethava for PMS URL
         input.projectPMSUrl = projectPMSUrl;
         input.submitType = submitType;
         input.useContributorAgreements = contributorAgreements;

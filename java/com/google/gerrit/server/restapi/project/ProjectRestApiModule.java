@@ -96,8 +96,11 @@ public class ProjectRestApiModule extends RestApiModule {
     put(DASHBOARD_KIND).to(SetDashboard.class);
 
     get(PROJECT_KIND, "description").to(GetDescription.class);
+    get(PROJECT_KIND, "pms_url").to(GetPmsUrl.class);
     put(PROJECT_KIND, "description").to(PutDescription.class);
     delete(PROJECT_KIND, "description").to(PutDescription.class);
+    put(PROJECT_KIND, "pms_url").to(PutPmsUrl.class);
+    delete(PROJECT_KIND, "pms_url").to(PutPmsUrl.class);
     get(PROJECT_KIND, "HEAD").to(GetHead.class);
     put(PROJECT_KIND, "HEAD").to(SetHead.class);
     post(PROJECT_KIND, "index").to(Index.class);

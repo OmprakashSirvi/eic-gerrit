@@ -120,6 +120,7 @@ public class PutConfig implements RestModifyView<ProjectResource, ConfigInput> {
         .currentUser()
         .project(rsrc.getNameKey())
         .check(ProjectPermission.WRITE_CONFIG);
+    logger.atInfo().log("Applying config");
     return Response.ok(apply(rsrc.getProjectState(), input));
   }
 

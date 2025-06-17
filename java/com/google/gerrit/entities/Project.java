@@ -200,8 +200,9 @@ public abstract class Project {
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setDescription(String description);
+
     //Added by Nikita jethava for PMS URL
-        public abstract Builder setPmsUrl(String pmsUrl);
+    public abstract Builder setPmsUrl(String pmsUrl);
 
 
     @CanIgnoreReturnValue

@@ -80,8 +80,8 @@ import com.google.gerrit.server.restapi.project.GetAccess;
 import com.google.gerrit.server.restapi.project.GetConfig;
 import com.google.gerrit.server.restapi.project.GetDescription;
  //Added By Nikita jethava for PMS URL
-import com.google.gerrit.server.project.GetPmsUrl;
-import com.google.gerrit.server.project.PutPmsUrl;
+import com.google.gerrit.server.restapi.project.GetPmsUrl;
+import com.google.gerrit.server.restapi.project.PutPmsUrl;
 import com.google.gerrit.server.restapi.project.GetHead;
 import com.google.gerrit.server.restapi.project.GetParent;
 import com.google.gerrit.server.restapi.project.Index;
@@ -275,7 +275,7 @@ public class ProjectApiImpl implements ProjectApi {
       GetDescription getDescription,
       PutDescription putDescription,
        //Added By Nikita jethava for PMS URL
-       GetPmsUrl getPmsUrl,
+      GetPmsUrl getPmsUrl,
       PutPmsUrl putPmsUrl,
       ChildProjectApiImpl.Factory childApi,
       ChildProjectsCollection children,
@@ -419,7 +419,7 @@ public class ProjectApiImpl implements ProjectApi {
     this.getDescription = getDescription;
     this.putDescription = putDescription;
      //Added By Nikita jethava for PMS URL
-     this.getPmsUrl = getPmsUrl;
+    this.getPmsUrl = getPmsUrl;
     this.putPmsUrl = putPmsUrl;
     this.childApi = childApi;
     this.children = children;
@@ -499,7 +499,7 @@ public class ProjectApiImpl implements ProjectApi {
  //Added By Nikita jethava for PMS URL
   @Override
   public String pmsUrl() throws RestApiException {
-    return getPmsUrl.apply(checkExists());
+    return getPmsUrl.apply(checkExists()).toString();
   }
 
   @Override
@@ -560,7 +560,8 @@ public class ProjectApiImpl implements ProjectApi {
    @Override
   public void pmsUrl(PmsUrlInput in) throws RestApiException {
     try {
-      putPmsUrl.apply(checkExists(), in);
+      String unused = putPmsUrl.apply(checkExists(), in).toString();
+
     } catch (Exception e) {
       throw asRestApiException("Cannot put project PMS URL", e);
     }

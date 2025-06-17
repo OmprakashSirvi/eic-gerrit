@@ -43,6 +43,7 @@ import org.eclipse.jgit.lib.Repository;
 public class ProjectConfigEntry {
   private final String displayName;
   private final String description;
+  private final String pmsUrl;
   private final boolean inheritable;
   @Nullable private final String defaultValue;
   private final ProjectConfigEntryType type;
@@ -53,12 +54,12 @@ public class ProjectConfigEntry {
   }
 
   public ProjectConfigEntry(String displayName, String defaultValue, boolean inheritable) {
-    this(displayName, defaultValue, inheritable, null);
+    this(displayName, defaultValue, inheritable, null, null);
   }
 
   public ProjectConfigEntry(
-      String displayName, String defaultValue, boolean inheritable, String description) {
-    this(displayName, defaultValue, ProjectConfigEntryType.STRING, null, inheritable, description);
+      String displayName, String defaultValue, boolean inheritable, String description, String pmsUrl) {
+    this(displayName, defaultValue, ProjectConfigEntryType.STRING, null, inheritable, description, pmsUrl);
   }
 
   public ProjectConfigEntry(String displayName, int defaultValue) {
@@ -77,7 +78,8 @@ public class ProjectConfigEntry {
         ProjectConfigEntryType.INT,
         null,
         inheritable,
-        description);
+        description,
+        null);
   }
 
   public ProjectConfigEntry(String displayName, long defaultValue) {
@@ -96,7 +98,8 @@ public class ProjectConfigEntry {
         ProjectConfigEntryType.LONG,
         null,
         inheritable,
-        description);
+        description,
+        null);
   }
 
   // For inheritable boolean use 'LIST' type with InheritableBoolean
@@ -112,7 +115,8 @@ public class ProjectConfigEntry {
         ProjectConfigEntryType.BOOLEAN,
         null,
         false,
-        description);
+        description,
+        null);
   }
 
   public ProjectConfigEntry(String displayName, String defaultValue, List<String> permittedValues) {
@@ -136,7 +140,8 @@ public class ProjectConfigEntry {
         ProjectConfigEntryType.LIST,
         permittedValues,
         inheritable,
-        description);
+        description,
+        null);
   }
 
   public <T extends Enum<?>> ProjectConfigEntry(
@@ -161,22 +166,26 @@ public class ProjectConfigEntry {
         ProjectConfigEntryType.LIST,
         Arrays.stream(permittedValues.getEnumConstants()).map(Enum::name).collect(toList()),
         inheritable,
-        description);
+        description,
+        null);
   }
 
+  // TODO: Figure out which constructor is been used.
   public ProjectConfigEntry(
       String displayName,
       String defaultValue,
       ProjectConfigEntryType type,
       List<String> permittedValues,
       boolean inheritable,
-      String description) {
+      String description,
+      String pmsUrl) {
     this.displayName = displayName;
     this.defaultValue = defaultValue;
     this.type = type;
     this.permittedValues = permittedValues;
     this.inheritable = inheritable;
     this.description = description;
+    this.pmsUrl = pmsUrl;
     if (type == ProjectConfigEntryType.ARRAY && inheritable) {
       throw new ProvisionException("ARRAY doesn't support inheritable values");
     }
@@ -188,6 +197,10 @@ public class ProjectConfigEntry {
 
   public String getDescription() {
     return description;
+  }
+
+  public String getPmsUrl() {
+    return pmsUrl;
   }
 
   public boolean isInheritable() {
@@ -299,7 +312,7 @@ public class ProjectConfigEntry {
    * @param newValue new entry value.
    */
   public void onUpdate(Project.NameKey project, Long oldValue, Long newValue) {}
-
+  // When project config is been updated, we also need to check if we have changed the PMS url
   public static class UpdateChecker implements GitReferenceUpdatedListener {
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 

@@ -498,7 +498,7 @@ export declare interface ConfigArrayParameterInfo
 export declare interface ConfigInfo {
   description?: string;
   //Added By Nikita jethava
-  pmsUrl?: String;
+  pms_url?: String;
   use_contributor_agreements?: InheritedBooleanInfo;
   use_content_merge?: InheritedBooleanInfo;
   use_signed_off_by?: InheritedBooleanInfo;

@@ -161,7 +161,7 @@ final class SetProjectCommand extends SshCommand {
      if (Strings.emptyToNull(projectPMSUrl) != null) {
       configInput.pmsUrl = projectPMSUrl;
     } else {
-      configInput.pmsUrl = projectControl.getProject().getPmsUrl();
+      configInput.pmsUrl = projectState.getProject().getPmsUrl();
     }
 
     try {

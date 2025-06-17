@@ -107,7 +107,7 @@ public class PostReviewOp implements BatchUpdateOp {
   @AutoValue
   abstract static class CopiedLabelUpdate {
     /**
-     * Type of the update that has been performed for a copied vote on a follow-up patch set.
+     * Type of the update that has been performed for  a copied vote on a follow-up patch set.
      *
      * <p>Whether the copied vote has been added
      *

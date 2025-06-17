@@ -285,19 +285,19 @@ export class GrRepo extends LitElement {
 
   //Added By Nikita jethava for PMS URL configuration
 private renderpmsUrl() {
-  //const pmsUrl = "XYZ";
+  //const pms_url = "XYZ";
   //Do not remove this below comment and later on replace it with proper line
-//.text=${this.repoConfig.pmsUrl ?? ''  
+//.text=${this.repoConfig.pms_url ?? ''  
   assertIsDefined(this.repoConfig, 'repoConfig');
   return html`
-    <h3 id="pmsUrl" class="heading-3">PMS URL</h3>
+    <h3 id="pms_url" class="heading-3">PMS URL</h3>
     <fieldset>
       <gr-suggestion-textarea
         id="PmsUrlInput"
-        class="pmsUrl"
+        class="pms_url"
         autocomplete="on"
         monospace
-          .text=${this.repoConfig.pmsUrl ?? ''
+          .text=${this.repoConfig.pms_url ?? ''
         }
         @text-changed=${this.handlepmsUrlTextChanged}
       ></gr-suggestion-textarea>
@@ -1018,6 +1018,9 @@ private renderpmsUrl() {
     if (originalConfig.description !== repoConfig.description) {
       return true;
     }
+    if (originalConfig.pms_url !== repoConfig.pms_url) {
+      return true;
+    }
     if (originalConfig.state !== repoConfig.state) {
       return true;
     }
@@ -1216,10 +1219,10 @@ private renderpmsUrl() {
   //Added By Nikita jethava for PMS URL configuration
 	private handlepmsUrlTextChanged(e: BindValueChangeEvent) {
     if (!this.repoConfig || this.loading) return;
-    if (this.repoConfig.pmsUrl === e.detail.value) return;
+    if (this.repoConfig.pms_url === e.detail.value) return;
     this.repoConfig = {
       ...this.repoConfig,
-      pmsUrl: e.detail.value,
+      pms_url: e.detail.value,
     };
     this.requestUpdate();
   }
