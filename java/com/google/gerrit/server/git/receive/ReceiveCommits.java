@@ -3712,6 +3712,21 @@ class ReceiveCommits {
             throw new StorageException("cannot update description of " + project.getName(), e);
           }
         }
+        //Added by Nikita jethava for pms url
+         try {
+          logger.atFine().log("Updating project pmsurl");
+          repo.setGitwebPmsUrl(ps.getProject().getPmsUrl());
+        } catch (IOException e) {
+          throw new StorageException("cannot update pmsurl of " + project.getName(), e);
+        }
+        if (allProjectsName.equals(project.getNameKey())) {
+          try {
+            createGroupPermissionSyncer.syncIfNeeded();
+          } catch (IOException | ConfigInvalidException e) {
+            throw new StorageException("cannot update pmsurl of " + project.getName(), e);
+          }
+        }
+        //end code by nikita 
       }
     }
   }

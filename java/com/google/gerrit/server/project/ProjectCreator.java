@@ -201,7 +201,11 @@ public class ProjectCreator {
       }
 
       configRevCommit = config.commit(md, false);
+      // The description is saved in the file: org.eclipse.jgit.internal.storage.file.FileRepository
       md.getRepository().setGitwebDescription(args.projectDescription);
+      //Added By Nikita jethava for pms url
+      md.getRepository().setGitwebPmsUrl(args.projectPMSUrl);
+
     } finally {
       if (configRevCommit != null) {
         fireEvents(args.getProject(), head, configRevCommit);

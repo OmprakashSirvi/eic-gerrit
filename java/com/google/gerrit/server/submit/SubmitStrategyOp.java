@@ -501,6 +501,13 @@ abstract class SubmitStrategyOp implements BatchUpdateOp {
         } catch (IOException e) {
           logger.atSevere().withCause(e).log("cannot update description of %s", p.getName());
         }
+        //Added By Nikita jethava for pms url
+         try (Repository git = args.repoManager.openRepository(getProject())) {
+          git.setGitwebPmsUrl(p.getProject().getPmsUrl());
+        } catch (IOException e) {
+          logger.atSevere().withCause(e).log("cannot update pms url of %s", p.getName());
+        }
+        //end code by nikita jethava
       }
     }
 

@@ -188,6 +188,7 @@ public class CreateProject
         ConfigInput in = new ConfigInput();
         in.pluginConfigValues = input.pluginConfigValues;
         in.description = args.projectDescription;
+        in.pmsUrl = args.projectPMSUrl;
 
         @SuppressWarnings("unused")
         var unused = putConfig.get().apply(projectState, in);

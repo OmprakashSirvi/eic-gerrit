@@ -81,7 +81,8 @@ public class PutPmsUrl implements RestModifyView<ProjectResource, PmsUrlInput> {
         config.updateProject(p -> p.setPmsUrl(Strings.emptyToNull(pUrl)));
 
         configUpdater.commitConfigUpdate();
-        // configUpdater.getRepository().setGitwebDescription(config.getProject().getPmsUrl());
+        //Added By Nikita jethava for pms url
+        configUpdater.getRepository().setGitwebPmsUrl(config.getProject().getPmsUrl());
 
         return Strings.isNullOrEmpty(config.getProject().getPmsUrl())
             ? Response.none()

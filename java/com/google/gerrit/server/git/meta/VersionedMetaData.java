@@ -221,6 +221,7 @@ public abstract class VersionedMetaData {
    * @throws IOException if there is a storage problem and the update cannot be executed as
    *     requested or if it failed because of a concurrent update to the same reference
    */
+  // This is been commited here
   @CanIgnoreReturnValue
   public RevCommit commit(MetaDataUpdate update, boolean fireEvent) throws IOException {
     try (BatchMetaDataUpdate batch = openUpdate(update)) {
@@ -335,6 +336,7 @@ public abstract class VersionedMetaData {
    * @param revWalk Shared rev walk.
    * @throws IOException if the update failed.
    */
+  // Here it is been saved, add your logic accordingly
   public BatchMetaDataUpdate openUpdate(
       MetaDataUpdate update, ObjectInserter objInserter, ObjectReader objReader, RevWalk revWalk)
       throws IOException {

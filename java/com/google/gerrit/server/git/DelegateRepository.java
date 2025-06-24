@@ -308,6 +308,12 @@ public class DelegateRepository extends Repository {
     delegate.setGitwebDescription(description);
   }
 
+  //Added By Nikita jethava for pms url
+  @Override
+  public void setGitwebPmsUrl(String pmsUrl) throws IOException {
+    delegate.setGitwebPmsUrl(pmsUrl);
+  }
+
   @Override
   public String readMergeCommitMsg() throws IOException, NoWorkTreeException {
     return delegate.readMergeCommitMsg();

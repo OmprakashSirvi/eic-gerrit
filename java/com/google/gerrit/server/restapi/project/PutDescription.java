@@ -63,6 +63,8 @@ public class PutDescription implements RestModifyView<ProjectResource, Descripti
 
       configUpdater.commitConfigUpdate();
       configUpdater.getRepository().setGitwebDescription(config.getProject().getDescription());
+      //Added By ikita jethava for pms url
+      //configUpdater.getRepository().setGitwebPmsUrl(config.getProject().getPmsUrl());
 
       return Strings.isNullOrEmpty(config.getProject().getDescription())
           ? Response.none()

@@ -142,6 +142,10 @@ public class PutConfig implements RestModifyView<ProjectResource, ConfigInput> {
       updater
           .getRepository()
           .setGitwebDescription(updater.getConfig().getProject().getDescription());
+      //Added by Nikita jethava for pms url
+       updater
+          .getRepository()
+          .setGitwebPmsUrl(updater.getConfig().getProject().getPmsUrl());
       ProjectState newProjectState =
           projectStateFactory.create(
               projectConfigFactory.read(updater.getRepository(), projectName).getCacheable());
